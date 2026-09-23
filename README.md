@@ -31,33 +31,33 @@ A modular backend application built with **FastAPI** for managing student record
 
 ```text
                     ┌──────────────────────┐
-                    │   Frontend Demo      │
-                    │   HTML / CSS / JS    │
+                    │    Frontend Demo     │
+                    │    HTML / CSS / JS   │
                     └──────────┬───────────┘
                                │
                                │ HTTP / REST
                                ▼
                     ┌──────────────────────┐
-                    │      FastAPI         │
+                    │       FastAPI        │
                     │    REST Backend      │
                     └──────────┬───────────┘
                                │
-                ┌──────────────┴──────────────┐
-                │                             │
-                ▼                             ▼
-       ┌─────────────────┐          ┌──────────────────┐
-       │  CRUD Operations │          │   Chat Service   │
-       └────────┬────────┘          └────────┬─────────┘
-                │                            │
-                ▼                            ▼
-       ┌─────────────────┐          ┌──────────────────┐
-       │ SQLAlchemy ORM  │          │    LangChain     │
-       └────────┬────────┘          └────────┬─────────┘
-                │                            │
-                ▼                            ▼
-       ┌─────────────────┐          ┌──────────────────┐
-       │ SQLite Database │          │   Google Gemini  │
-       └─────────────────┘          └──────────────────┘
+                 ┌─────────────┴─────────────┐
+                 │                           │
+                 ▼                           ▼
+        ┌─────────────────┐         ┌──────────────────┐
+        │ CRUD Operations │         │   Chat Service   │
+        └────────┬────────┘         └────────┬─────────┘
+                 │                           │
+                 ▼                           ▼
+        ┌─────────────────┐         ┌──────────────────┐
+        │ SQLAlchemy ORM  │         │    LangChain     │
+        └────────┬────────┘         └────────┬─────────┘
+                 │                           │
+                 ▼                           ▼
+        ┌─────────────────┐         ┌──────────────────┐
+        │ SQLite Database │         │   Google Gemini  │
+        └─────────────────┘         └──────────────────┘
 ```
 
 ### AI Chat Flow
@@ -91,7 +91,6 @@ This keeps database access controlled by the backend application.
 ```text
 Student-Database-Application-System-Backend/
 │
-├── .env
 ├── .gitignore
 ├── README.md
 ├── requirements.txt
@@ -100,26 +99,34 @@ Student-Database-Application-System-Backend/
 ├── database.py
 ├── models.py
 ├── crud.py
+├── schemas.py
 │
 ├── services/
 │   ├── chat_service.py
 │   └── tests/
 │       └── test_main.py
 │
-├── frontend/
-│   ├── index.html
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-│       ├── api.js
-│       ├── dashboard.js
-│       └── tests/
-│           └── test_api.py
-│
-└── students.db
+└── frontend/
+    ├── index.html
+    ├── css/
+    │   └── style.css
+    └── js/
+        ├── api.js
+        ├── dashboard.js
+        └── tests/
+            └── test_api.py
 ```
 
-> `students.db` and `.env` are excluded from Git using `.gitignore`.
+### Local-only files
+
+The following files are created locally and are intentionally excluded from Git:
+
+```text
+.env
+students.db
+```
+
+The `.env` file contains the Gemini API key and database configuration, while `students.db` is the local SQLite database.
 
 ---
 
@@ -192,7 +199,8 @@ You can use Swagger UI to test all API endpoints directly from the browser.
 ### 1. Clone the repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone https://github.com/Mohd-Shariq-codes/Student-Database-Application-System-Backend.git
+
 cd Student-Database-Application-System-Backend
 ```
 
@@ -262,6 +270,7 @@ Open another PowerShell terminal:
 
 ```powershell
 cd frontend
+
 python -m http.server 5500
 ```
 
@@ -305,6 +314,14 @@ The test suite covers areas including:
 * Chat endpoint
 * Gemini response handling through mocking
 
+### Test Result
+
+The current test suite contains **16 automated tests**, all passing successfully.
+
+```text
+16 passed
+```
+
 ---
 
 ## 🔒 Security and Configuration
@@ -315,38 +332,4 @@ The project follows basic security and configuration practices:
 * `.env` is excluded from Git.
 * The SQLite database file is excluded from Git.
 * Input data is validated using Pydantic.
-* Database operations are handled through SQLAlchemy ORM.
-* AI responses are restricted to backend-provided statistics.
-* The AI assistant does not receive unrestricted database query execution capabilities.
-
----
-
-## 📈 Future Improvements
-
-Possible future improvements include:
-
-* Authentication and authorization
-* Pagination and filtering for student records
-* More advanced student analytics
-* Additional chatbot statistics
-* Production database such as PostgreSQL
-* Deployment to a cloud platform
-* Frontend framework integration
-
-These improvements are outside the current project scope.
-
----
-
-## 👨‍💻 Project Purpose
-
-This project demonstrates the development of a modular backend system combining:
-
-* REST API development
-* Database management
-* ORM-based architecture
-* Data validation
-* Automated testing
-* AI/LLM integration
-* Frontend-to-backend API communication
-
-The backend is designed as the primary application, while the included frontend serves as a demonstration client for interacting with the APIs.
+* Database operations are handled through
